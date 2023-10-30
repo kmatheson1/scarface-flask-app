@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Upload</title>
+</head>
+<body>
+    <h1>Upload an Image</h1>
+    <!-- enctype="multipart/form-data" allows form to manage file uploads -->
+    <form method="POST" action="/upload" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Upload">
+    </form>
+
+    <h2>Uploaded Images:</h2>
+    <ul>
+        {% for filename in os.listdir('uploads') %}
+            <li>
+                <!-- uses uploaded_file to get url for each file in 'uploads' -->
+                <img src="{{ url_for('uploaded_file', filename=filename) }}" alt="{{ filename }}">
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
