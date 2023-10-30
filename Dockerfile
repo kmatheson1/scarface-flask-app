@@ -17,4 +17,3 @@ RUN pipenv install --system --deploy
 
 # command used to run flask app
 CMD ["python", "app.py"]
-
