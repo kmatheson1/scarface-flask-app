@@ -6,17 +6,26 @@
 <body>
     <h1>Upload an Image</h1>
     <!-- enctype="multipart/form-data" allows form to manage file uploads -->
-    <form method="POST" action="/upload" enctype="multipart/form-data">
+    <form method="POST" action="/" enctype="multipart/form-data">
         <input type="file" name="file">
         <input type="submit" value="Upload">
     </form>
 
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
     <h2>Uploaded Images:</h2>
-    <ul>
-        {% for filename in os.listdir('uploads') %}
-            <li>
-                <!-- uses uploaded_file to get url for each file in 'uploads' -->
-                <img src="{{ url_for('uploaded_file', filename=filename) }}" alt="{{ filename }}">
+    <ul style="list-style: none; padding: 0; margin: 0;">
+        {% for filename in uploaded_images %}
+            <li style="list-style: none; display: inline-block; margin: 10px;">
+                <img src="{{ url_for('uploaded_file', filename=filename) }}" alt="{{ filename }}" style="max-width: 50%; height: auto;">
             </li>
         {% endfor %}
     </ul>
