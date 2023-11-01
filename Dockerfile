@@ -15,5 +15,7 @@ WORKDIR /app
 #exact versions (--deploy)
 RUN pipenv install --system --deploy
 
+EXPOSE 5000
+
 # command used to run flask app
 CMD ["python", "app.py"]
